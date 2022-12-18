@@ -7,5 +7,9 @@ module.exports = {
     "./node_modules/flowbite-react/**/*.js",
   ],
   theme: {},
-  plugins: [require("tw-elements/dist/plugin"), require("flowbite/plugin")],
+  plugins: [
+    require("tw-elements/dist/plugin"),
+    require("flowbite/plugin"),
+    // require("daisyui"),
+  ],
 };

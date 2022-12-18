@@ -1,3 +1,4 @@
+import Header from "../components/general/header";
 import "../styles/globals.css";
 import { useEffect } from "react";
 

@@ -1,3 +1,5 @@
+import Comment from "../general/comment";
+
 const UserPhoto = () => {
   return (
     <div>
@@ -26,36 +28,36 @@ const UserPhoto = () => {
             </div>
             <div className="modal-body relative p-4">
               <section>
-                {/* zurag */}
-                {/* <img
-                    className="w-full "
-                    src={
-                      modalData
-                        ? `http://localhost:3000/images/${modalData.file_name}`
-                        : null
-                    }
-                  /> */}
+                zurag
+                <img
+                  className="w-full "
+                  src={
+                    modalData
+                      ? `http://localhost:3000/images/${modalData.file_name}`
+                      : null
+                  }
+                />
               </section>
               <section>
-                {/* <div className="flex font-bold">
-                    <p>{modalData ? modalData.likes : null}</p>
-                    <p className="ml-1">Likes </p>
-                  </div> */}
-                {/* <div className="text-gray-400 text-sm">
-                    {modalData ? modalData.date_time : null}
-                  </div> */}
+                <div className="flex font-bold">
+                  <p>{modalData ? modalData.likes : null}</p>
+                  <p className="ml-1">Likes </p>
+                </div>
+                <div className="text-gray-400 text-sm">
+                  {modalData ? modalData.date_time : null}
+                </div>
               </section>
               <section>
                 <p>comments...</p>
-                {/* <div className="w-full ">
-                    {modalData
-                      ? modalData.comments
-                        ? modalData.comments.map((el, i) => (
-                            <Comment key={i} el={el} />
-                          ))
-                        : null
-                      : null}
-                  </div> */}
+                <div className="w-full ">
+                  {modalData
+                    ? modalData.comments
+                      ? modalData.comments.map((el, i) => (
+                          <Comment key={i} el={el} />
+                        ))
+                      : null
+                    : null}
+                </div>
               </section>
             </div>
           </div>

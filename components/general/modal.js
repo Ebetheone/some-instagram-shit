@@ -8,13 +8,9 @@ const Modal = ({
   sendComment,
   allcomments,
 }) => {
-  // console.log(modalData.comments);
   console.log(allcomments);
   return (
     <div>
-      {/* Button trigger modal */}
-
-      {/* Modal */}
       <div
         className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
         id="exampleModalScrollable"

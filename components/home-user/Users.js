@@ -15,7 +15,7 @@ const Users = ({ el }) => {
       })
       .catch((err) => console.log(err));
   }, []);
-  console.log(user);
+
   return user ? (
     <div
       className="text-center mx-4 my-2 cursor-pointer"
