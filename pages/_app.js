@@ -1,6 +1,6 @@
-import Header from "../components/general/header";
 import "../styles/globals.css";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
+import { OrderStore } from "../context";
 
 function MyApp({ Component, pageProps }) {
   useEffect(() => {
@@ -9,7 +9,12 @@ function MyApp({ Component, pageProps }) {
     };
     use();
   }, []);
-  return <Component {...pageProps} />;
+
+  return (
+    <OrderStore>
+      <Component {...pageProps} />
+    </OrderStore>
+  );
 }
 
 export default MyApp;

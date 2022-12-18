@@ -1,6 +1,8 @@
+/* eslint-disable @next/next/no-img-element */
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { getUserPro, getPhotosOfUser } from "../../lib/api";
+import { useEffect, useState, useContext } from "react";
+import { getPhotosOfUser } from "../../lib/api";
+import Context from "../../context";
 const Users = ({ el }) => {
   const router = useRouter();
   const [user, setUser] = useState();
@@ -15,6 +17,8 @@ const Users = ({ el }) => {
       })
       .catch((err) => console.log(err));
   }, []);
+  const ctx = useContext(Context);
+  const mode = ctx.mode;
 
   return user ? (
     <div
@@ -28,7 +32,13 @@ const Users = ({ el }) => {
         className="rounded-full w-32 h-32 mb-4 mx-auto"
         alt="Avatar"
       />
-      <h5 className="text-xl font-medium leading-tight mb-2">
+      <h5
+        className={
+          mode
+            ? "text-xl font-medium leading-tight mb-2 text-black"
+            : "text-xl font-medium leading-tight mb-2 text-white"
+        }
+      >
         {el.first_name}
       </h5>
       <p className="text-gray-500">{el.occupation}</p>
