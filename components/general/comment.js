@@ -1,5 +1,8 @@
-import { useEffect, useState } from "react";
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
+import { useEffect, useState, useContext } from "react";
 import { getPhotosOfUser, getUserPro } from "../../lib/api";
+import Context from "../../context";
 
 const Comment = ({ el }) => {
   const [user, setUser] = useState();
@@ -16,6 +19,9 @@ const Comment = ({ el }) => {
       .catch((err) => console.log(err));
   }, []);
 
+  const ctx = useContext(Context);
+  const mode = ctx.mode;
+
   return user ? (
     <div className="my-2">
       {" "}
@@ -30,11 +36,9 @@ const Comment = ({ el }) => {
         </div>
         <div>
           <div>
-            <div className="flex">
-              <p className="mr-4">{user.first_name}</p>
-              <p className="text-gray-500">{el.comment}</p>
-            </div>
-
+            <p className={mode ? "text-gray-500" : "text-white"}>
+              {el.comment}
+            </p>
             <p className="text-gray-400 text-sm">{el.date_time}</p>
           </div>
         </div>

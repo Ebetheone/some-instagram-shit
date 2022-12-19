@@ -1,6 +1,9 @@
-import { useEffect, useState } from "react";
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
+import React, { useEffect, useState, useContext } from "react";
 import Comment from "./comment";
 import { addCommentById } from "../../lib/api";
+import Context from "../../context";
 const Modal = ({
   modalData,
   newcomm,
@@ -9,6 +12,8 @@ const Modal = ({
   allcomments,
 }) => {
   console.log(allcomments);
+  const ctx = useContext(Context);
+  const mode = ctx.mode;
   return (
     <div>
       <div
@@ -19,7 +24,13 @@ const Modal = ({
         aria-hidden="true"
       >
         <div className="modal-dialog modal-dialog-scrollable relative w-auto pointer-events-none">
-          <div className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
+          <div
+            className={
+              mode
+                ? "modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current"
+                : "modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-black bg-clip-padding rounded-md outline-none text-current"
+            }
+          >
             <div className="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
               <div
                 className="text-xl font-medium leading-normal text-gray-800"
@@ -27,14 +38,17 @@ const Modal = ({
               ></div>
               <button
                 type="button"
-                className="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
+                className={
+                  mode
+                    ? "btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline bg-white"
+                    : "btn-close box-content w-4 h-4 p-1 text-white border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline bg-white"
+                }
                 data-bs-dismiss="modal"
                 aria-label="Close"
               />
             </div>
             <div className="modal-body relative p-4">
               <section>
-                {/* zurag */}
                 <img
                   className="w-full "
                   src={
@@ -45,17 +59,30 @@ const Modal = ({
                 />
               </section>
               <section>
-                <div className="flex font-bold">
+                <div
+                  className={
+                    mode
+                      ? "flex font-bold text-black"
+                      : "flex font-bold text-white"
+                  }
+                >
                   <p>{modalData ? modalData.likes : null}</p>
                   <p className="ml-1">Likes </p>
                 </div>
-                <div className="text-gray-400 text-sm">
+                <div
+                  className={
+                    mode
+                      ? "text-gray-400 text-sm"
+                      : "text-[rgb(255,255,255)] text-sm"
+                  }
+                >
                   {modalData ? modalData.date_time : null}
                 </div>
               </section>
               <section>
-                <p>comments...</p>
-                <div className="w-full ">
+                <div
+                  className={mode ? "w-full text-black " : "w-full text-white"}
+                >
                   {modalData
                     ? allcomments
                       ? allcomments.map((el, i) => <Comment key={i} el={el} />)
@@ -64,7 +91,7 @@ const Modal = ({
                 </div>
               </section>
               <section className="w-full">
-                <div className="w-full flex">
+                <div className="w-full flex items-center">
                   <input
                     onChange={(e) => {
                       setNewcomm(e.target.value);
@@ -73,10 +100,14 @@ const Modal = ({
                     value={newcomm}
                     type="text"
                     placeholder="comment..."
-                    className="w-full outline-slate-900"
+                    className={
+                      mode
+                        ? "w-10/12 mr-auto outline-slate-900 rounded mt-[10px] bg-transparent flex items-center text-black"
+                        : "w-10/12 mr-auto outline-slate-900 rounded mt-[10px] bg-transparent flex items-center text-white"
+                    }
                   />
                   <div
-                    className="cursor-pointer flex justify-center items-center"
+                    className="cursor-pointer flex justify-center items-center text-[#1890ff] font-bold mt-2"
                     onClick={() => {
                       sendComment();
                     }}

@@ -54,7 +54,7 @@ export default function Profile({ user, photos }) {
             <div className="relative col-span-1 text-center cursor-pointer w-40 h-30">
               <img
                 className="rounded-full w-40 h-40 mb-4 mx-auto"
-                src="/images/kenobi1.jpg"
+                src={`/images/${photos[0].file_name}`}
                 alt="prolfe pic"
                 layout="fill"
               />
