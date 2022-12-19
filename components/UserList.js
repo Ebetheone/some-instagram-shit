@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import Users from "./home-user/Users";
+import Card from "./card";
 import Context from "../context";
 
 const UserList = ({ search, users }) => {
@@ -9,18 +10,22 @@ const UserList = ({ search, users }) => {
   return (
     <div
       className={
-        mode
-          ? "text-gray-700 w-full mx-auto bg-white h-[93.4vh]"
-          : "text-gray-700 w-full mx-auto bg-black h-[93.4vh]"
+        mode ? "w-full bg-white h-full flex" : "w-full bg-black h-full flex"
       }
     >
-      <div className="py-4">
-        <div className="flex justify-center"></div>
+      <div className="w-[60%] h-full pt-[50px] flex flex-col gap-5">
+        {users.map((el, i) => (
+          <div className="text-white w-full flex justify-end" key={i}>
+            <Card el={el} />
+          </div>
+        ))}
       </div>
-      <div className="w-2/3 mx-auto flex flex-wrap justify-center align-center mt-[100px]">
+      <div className="w-[40%] h-full pt-[50px] flex flex-col">
         {users.map((el, i) =>
           el.first_name.toLowerCase().search(search.toLowerCase()) > -1 ? (
-            <Users key={i} el={el} />
+            <div className="w-full flex justify-center" key={i}>
+              <Users el={el} />
+            </div>
           ) : null
         )}
       </div>

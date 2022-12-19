@@ -22,26 +22,28 @@ const Users = ({ el }) => {
 
   return user ? (
     <div
-      className="text-center mx-4 my-2 cursor-pointer"
+      className="w-[150px] h-[100px] text-center my-2 mr-[27%] cursor-pointer flex items-center gap-[10px]"
       onClick={() => {
         router.push(`/user/${el._id}`);
       }}
     >
       <img
         src={`http://localhost:3000/images/${user.file_name}`}
-        className="rounded-full w-32 h-32 mb-4 mx-auto"
+        className="rounded-full w-3/4 mx-auto object-cover"
         alt="Avatar"
       />
-      <h5
-        className={
-          mode
-            ? "text-xl font-medium leading-tight mb-2 text-black"
-            : "text-xl font-medium leading-tight mb-2 text-white"
-        }
-      >
-        {el.first_name}
-      </h5>
-      <p className="text-gray-500">{el.occupation}</p>
+      <div className="text-left">
+        <h5
+          className={
+            mode
+              ? "text-sm font-medium leading-tight text-black"
+              : "text-sm font-medium leading-tight text-white"
+          }
+        >
+          {el.first_name}
+        </h5>
+        <p className="text-gray-500 text-sm">{el.occupation}</p>
+      </div>
     </div>
   ) : null;
 };
