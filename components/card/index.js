@@ -2,15 +2,26 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from "react";
 import { getPhotosOfUser } from "../../lib/api";
-
+import Comment from "../general/comment";
+import { useRouter } from "next/router";
+import { addCommentById } from "../../lib/api";
 const Card = ({ el }) => {
   const [user, setUser] = useState();
+  const [comment, setComment] = useState("");
+
+  const router = useRouter();
 
   const userPRO = (id) => {
     const photos = getPhotosOfUser(id);
     return photos;
   };
-
+  console.log(el);
+  const sendComment = async () => {
+    await addCommentById("63a138a505f89926e40e4c44", user?._id, comment);
+    setComment("");
+    router.reload();
+  };
+  console.log(el);
   useEffect(() => {
     userPRO(el._id)
       .then((res) => {
@@ -24,7 +35,7 @@ const Card = ({ el }) => {
       <div className="w-11/12 mx-auto h-full flex items-center justify-between">
         <div className="cursor-pointer flex items-center gap-[10px] py-[10px]">
           <img
-            src={`http://localhost:3000/images/${user.file_name}`}
+            src={`http://localhost:3000/images/${user?.file_name}`}
             alt="logo"
             className="w-10 h-9 object-cover rounded-[50%]"
           />
@@ -35,7 +46,7 @@ const Card = ({ el }) => {
         <img src="/meatball.png" alt="menu" className="cursor-pointer" />
       </div>
       <img
-        src={`http://localhost:3000/images/${user.file_name}`}
+        src={`http://localhost:3000/images/${user?.file_name}`}
         alt="picture"
         className="w-full object-cover cursor-pointer"
       />
@@ -72,16 +83,21 @@ const Card = ({ el }) => {
         </strong>{" "}
         {el.location + " " + el.occupation}
       </div>
+      {user?.comments &&
+        user.comments.map((com) => <Comment key={com._id} el={com} />)}
       <div className="w-11/12 mx-auto flex items-center pb-3 pt-1">
         <input
           onChange={(e) => {
-            console.log(e.target.value);
+            setComment(e.target.value);
           }}
           type="text"
           placeholder="Add a comment..."
           className="w-10/12 mr-auto outline-slate-900 rounded bg-transparent flex items-center text-black"
         />
-        <button className="cursor-pointer flex justify-center items-center text-[#1890ff] font-bold">
+        <button
+          className="cursor-pointer flex justify-center items-center text-[#1890ff] font-bold"
+          onClick={() => sendComment()}
+        >
           Post
         </button>
       </div>
