@@ -39,9 +39,7 @@ const Comment = ({ el }) => {
         </div>
         <div>
           <div>
-            <p className={mode ? "text-gray-500" : "text-white"}>
-              {el?.comment}
-            </p>
+            <p className="text-black">{el?.comment}</p>
             <p className="text-gray-400 text-sm">{el?.date_time}</p>
           </div>
         </div>
